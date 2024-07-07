@@ -89,7 +89,7 @@ class FavouriteStoreFactory @Inject constructor(
             val conditionUrl: String
         ) : Msg
 
-        data class WeatherloadingError(
+        data class WeatherLoadingError(
             val cityId: Int
         ) : Msg
 
@@ -153,7 +153,7 @@ class FavouriteStoreFactory @Inject constructor(
                 )
             } catch (e: Exception) {
                 dispatch(
-                    Msg.WeatherloadingError(cityId = city.id)
+                    Msg.WeatherLoadingError(cityId = city.id)
                 )
             }
 
@@ -203,12 +203,12 @@ class FavouriteStoreFactory @Inject constructor(
                 )
             }
 
-            is Msg.WeatherloadingError -> {
+            is Msg.WeatherLoadingError -> {
                 copy(
                     cityItems = cityItems.map {
-                        if (it.city.id == msg.cityId){
+                        if (it.city.id == msg.cityId) {
                             it.copy(weatherState = State.WeatherState.Error)
-                        } else{
+                        } else {
                             it
                         }
                     }
