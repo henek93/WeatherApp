@@ -102,7 +102,7 @@ class SearchStoreFactory @Inject constructor(
 
         private var searchJob: Job? = null
 
-        override fun executeIntent(intent: Intent) {
+        override fun executeIntent(intent: Intent, getState: () -> State) {
             when (intent) {
                 is Intent.ChangeSearchQuery -> {
                     dispatch(Msg.ChangeQuery(query = intent.searchQuery))
@@ -133,7 +133,7 @@ class SearchStoreFactory @Inject constructor(
                     searchJob = scope.launch {
                         dispatch(Msg.LoadingSearchResult)
                         try {
-                            val cities = searchCityUseCase(state().searchQuery)
+                            val cities = searchCityUseCase(getState().searchQuery)
                             dispatch(Msg.SuccessLoading(cities = cities))
                         } catch (e: Exception) {
                             dispatch(Msg.ErrorLoading)

@@ -9,7 +9,8 @@ import javax.inject.Inject
 @ApplicationScope
 @Component(
     modules = [
-        DataModule::class
+        DataModule::class,
+        PresentationModule::class
     ]
 )
 interface ApplicationComponent {
