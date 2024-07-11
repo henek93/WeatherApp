@@ -45,13 +45,6 @@ internal class RootStoreFactory(
     }
 
     private class ExecutorImpl : CoroutineExecutor<Intent, Action, State, Msg, Label>() {
-        override fun executeIntent(intent: Intent) {
-
-        }
-
-        override fun executeAction(action: Action) {
-            super.executeAction(action)
-        }
     }
 
     private object ReducerImpl : Reducer<State, Msg> {
