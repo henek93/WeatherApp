@@ -3,4 +3,5 @@
     <string name="add_favourite">Добавить город</string>
     <string name="search">Поиск</string>
     <string name="upcoming">Прогноз</string>
+    <string name="empty_result_text">По вашему запросу ничего не найдено</string>
 </resources>

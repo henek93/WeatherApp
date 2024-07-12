@@ -106,6 +106,16 @@ class SearchStoreFactory @Inject constructor(
             when (intent) {
                 is Intent.ChangeSearchQuery -> {
                     dispatch(Msg.ChangeQuery(query = intent.searchQuery))
+                    searchJob?.cancel()
+                    searchJob = scope.launch {
+                        dispatch(Msg.LoadingSearchResult)
+                        try {
+                            val cities = searchCityUseCase(getState().searchQuery)
+                            dispatch(Msg.SuccessLoading(cities = cities))
+                        } catch (e: Exception) {
+                            dispatch(Msg.ErrorLoading)
+                        }
+                    }
                 }
 
                 Intent.ClickBack -> {
@@ -125,7 +135,6 @@ class SearchStoreFactory @Inject constructor(
                             }
                         }
                     }
-                    publish(Label.OpenForecast(city = intent.city))
                 }
 
                 Intent.ClickSearch -> {
