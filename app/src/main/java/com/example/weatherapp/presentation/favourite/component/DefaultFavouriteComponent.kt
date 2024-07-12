@@ -18,7 +18,7 @@ import javax.inject.Inject
 
 class DefaultFavouriteComponent @AssistedInject constructor(
     private val favouriteStoreFactory: FavouriteStoreFactory,
-    @Assisted("onCityItemClick") private val onCityItemClick: (City) -> Unit,
+    @Assisted("onCityItemClick") private val onCityItemClicked: (City) -> Unit,
     @Assisted("onAddClickFavourite") private val onAddClickFavourite: () -> Unit,
     @Assisted("onSearchClick") private val onSearchClick: () -> Unit,
     @Assisted("componentContext") componentContext: ComponentContext
@@ -32,7 +32,7 @@ class DefaultFavouriteComponent @AssistedInject constructor(
             store.labels.collect {
                 when (it) {
                     is FavouriteStore.Label.CityItemClick -> {
-                        onCityItemClick(it.city)
+                        onCityItemClicked(it.city)
                     }
 
                     FavouriteStore.Label.ClickSearch -> {
